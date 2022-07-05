@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.example'
+group 'ru.netology'
 version '1.0-SNAPSHOT'
 
 compileJava.options.encoding = "UTF-8"
@@ -14,9 +14,8 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-    testImplementation 'com.github.javafaker:javafaker:1.0.1'
-
-    testImplementation 'com.codeborne:selenide:6.3.4'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'com.codeborne:selenide:6.6.3'
 }
 
 test {

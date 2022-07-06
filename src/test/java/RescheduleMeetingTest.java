@@ -1,5 +1,9 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -12,8 +16,15 @@ import java.util.Locale;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+@Feature("Тесты перепланирования встречи")
 public class RescheduleMeetingTest {
     private Faker faker;
+    private String url = "http://localhost:7777/";
+
+    @BeforeAll
+    static void setUpListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @BeforeEach
     void setUpAll() {
@@ -37,7 +48,7 @@ public class RescheduleMeetingTest {
         int days = 3;
         int changedDays = 4;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));
@@ -64,7 +75,7 @@ public class RescheduleMeetingTest {
         int days = 365;
         int changedDays = 366;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));
@@ -90,7 +101,7 @@ public class RescheduleMeetingTest {
         int days = 61;
         int changedDays = 30;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));

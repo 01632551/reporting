@@ -1,5 +1,8 @@
-import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +17,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+@Feature("Тесты дат доставки карты")
 public class DeliveryCardDateTest {
     private Faker faker;
+    private String url = "http://localhost:7777";
+
+    @BeforeAll
+    static void setUpListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @BeforeEach
     void setUpAll(){
@@ -37,7 +47,7 @@ public class DeliveryCardDateTest {
 
         int days = 3;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));
@@ -58,7 +68,7 @@ public class DeliveryCardDateTest {
 
         int days = 365;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));
@@ -79,7 +89,7 @@ public class DeliveryCardDateTest {
 
         int days = 61;
 
-        open("http://localhost:7777/");
+        open(url);
         $("[data-test-id=city] input").setValue(administrativeCity);
         $("[data-test-id=date] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id=date] input").doubleClick().setValue(generateDate(days));

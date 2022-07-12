@@ -7,5 +7,4 @@ public class UserInfo {
     private final String city;
     private final String name;
     private final String phoneNumber;
-    private final String date;
 }
